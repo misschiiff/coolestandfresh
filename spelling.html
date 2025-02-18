@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coolest and Fresh</title>
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Observer.min.js"></script>
+
+    
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="style.css">
+    
+    
+        <!-- Font Awesome CDN -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap');
+
+            html, body {
+              margin:0;
+              padding:0;
+              width:100%;
+              height:100%;
+              font-family: 'Roboto Mono', sans-serif;
+            }
+            
+            body, #menu, #main, #q {
+              display:flex;
+              justify-content:center;
+              align-items:center;
+              flex-direction:column;
+            }
+            
+            #menu {
+              position:absolute;
+              width:50%;
+              height:50%;
+              background:#fff;
+              border-radius:12px;
+              box-shadow:0px 5px 10px rgba(0,0,0,0.3);
+              text-align:center;
+              padding:50px;
+            }
+            
+            #main {
+              top:0;
+              visibility:hidden;
+            }
+            
+            h2 {
+              font-size:clamp(24px, 4.5vw, 72px);
+              color:#999;
+            }
+            
+            b {
+              color: #000;
+            }
+            
+            button#speak {
+              width:clamp(90px, 10vw, 150px);
+              height:clamp(90px, 10vw, 150px);
+              margin-top:4vh;
+            }
+            
+            #progress {
+              position:fixed;
+              bottom:4vh;
+              left:50%;
+              transform:translateX(-50%);
+              font-size:4vw;
+              overflow:visible;
+              width:50%;
+              height:5%;
+              max-width:800px;
+              opacity:0.5;
+            }
+            
+            #confetti {
+              left:0;
+              top:0;
+              width:100%;
+              height:100%;
+              position:fixed;
+              pointer-events:none;
+            }
+            
+            
+            #menu h3 {
+              text-transform: uppercase;
+              letter-spacing:0.5em;
+              color:#888;
+            }
+            
+            #menu h4 {
+              color:#222;
+              font-size:1.8em;
+              margin-bottom:9vh;
+            }
+            
+            /* Much love to duolingo for the button style */
+            
+            button {
+              appearance: button;
+              background-color: #160a30;
+              border: solid transparent;
+              border-radius: 16px;
+              border-width: 0 0 4px;
+              color: #fff;
+              cursor: pointer;
+              font-family: 'Roboto Mono', sans-serif;
+              font-size: 20px;
+              font-weight: 700;
+              letter-spacing: .8px;
+              line-height: 20px;
+              margin: 0;
+              outline: none;
+              overflow: visible;
+              padding: 13px 16px;
+              text-align: center;
+              text-transform: uppercase;
+              touch-action: manipulation;
+              transform: translateZ(0);
+              transition: filter .2s;
+              user-select: none;
+              -webkit-user-select: none;
+              vertical-align: middle;
+              white-space: nowrap;
+              width: 50%;
+            }
+            
+            button:after {
+              background-clip: padding-box;
+              background-color: #513c59;
+              border: solid transparent;
+              border-radius: 16px;
+              border-width: 0 0 4px;
+              bottom: -4px;
+              content: "";
+              left: 0;
+              position: absolute;
+              right: 0;
+              top: 0;
+              z-index: -1;
+            }
+            
+            button:main, button:focus {
+              user-select: auto;
+            }
+            
+            button:hover:not(:disabled) {
+              filter: brightness(1.35);
+            }
+            
+            button:disabled {
+              cursor: auto;
+            }
+            
+            button:active {
+              border-width: 4px 0 0;
+              background: none;
+            } 
+        </style>
+</head>
+<body>
+    <div id="main">
+        <div id="q">
+          <h2></h2>
+          <button id="speak" role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12.5 10.5" width="66%" height="66%" style="overflow:visible">
+              <path fill="#fff" d="M11.09 1.76a4.49 4.49 0 0 1 0 6.98c-.24.2-.6.16-.79-.08s-.16-.6.08-.79a3.37 3.37 0 0 0 0-5.24c-.24-.2-.28-.55-.08-.79s.55-.28.79-.08ZM9.67 3.51a2.26 2.26 0 0 1 0 3.5c-.24.2-.6.16-.79-.08s-.16-.6.08-.79a1.13 1.13 0 0 0 0-1.74c-.24-.2-.28-.55-.08-.79s.55-.28.79-.08ZM7.06.07c.27.12.44.39.44.68v9c0 .3-.17.56-.44.68s-.59.07-.81-.12L3.09 7.5H1.5A1.5 1.5 0 0 1 0 6V4.5C0 3.67.67 3 1.5 3h1.59L6.25.19c.22-.2.54-.24.81-.12Z"/>
+            </svg>  
+          </button>
+        </div>
+        <div id="confetti"></div>
+        <svg id="progress" viewBox="0 0 16 2" xmlns="http://www.w3.org/2000/svg" stroke-linecap="round">
+          <path stroke="#ccc" d="M0,1 l16,0" />
+          <path class="fg" stroke="#000" d="M0,1 l1,0"/>
+        </svg>
+      </div>
+      
+      <div id="menu">
+        <h3>Sight Words Game</h3>
+        <h4>Goal: spell the missing words</h4>
+        <button id="start" role="button">LET'S GO!</button>
+      </div>
+<script>
+    console.clear()
+
+    // Start menu
+    const startBtn = document.querySelector('#start')
+    startBtn.onclick = ()=>{
+      startSnd.play()
+      gsap.timeline({defaults:{duration:0.3, ease:'power1.inOut'}})
+      .set('#progress .fg', {attr:{d:'M0,1 l1,0'}})
+      .to('#menu', {autoAlpha:0})
+      .add(setQ)
+      .to('#main', {autoAlpha:1})  
+    }
+    
+    // Quiz
+    let current = 0
+    let lines = [
+      'Keep your head <b>above</b> water.',
+      'Just <b>add</b> some salt.',
+      'Dinner is <b>almost</b> ready.',
+      'We get <b>along</b> well.',
+      'We <b>always</b> eat breakfast.',
+      'The story <b>began</b> slowly.',
+      'Leaves <b>begin</b> to drop in fall.',
+      'The cat is <b>being</b> sweet.',
+      'Rocks are <b>below</b> the waterfall.',
+      'We are stuck <b>between</b> two trucks.',
+      'Put your <b>book</b> on the shelf.',
+      'I like <b>both</b> cake and pie.',
+      'She drove her <b>car</b> today.',
+      'Please <b>carry</b> your own bag.',
+      'The <b>children</b> are asleep.'
+    ]
+    // Shuffle sentences in lines array
+    function shuffle(arr) {
+      for (let i=arr.length-1; i>0; i--) {
+        const j = Math.floor(Math.random() * (i+1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+    }
+    shuffle(lines)
+    
+    const chimeSnd = new Audio()
+    chimeSnd.src = 'https://cdn.freesound.org/previews/234/234565_4019029-lq.mp3' //Credit: https://freesound.org/people/FoolBoyMedia/sounds/234565/
+    const startSnd = new Audio()
+    startSnd.src = 'https://cdn.freesound.org/previews/320/320655_5260872-lq.mp3' //Credit: https://freesound.org/people/rhodesmas/sounds/320655/
+      
+    const q = document.querySelector('#q')
+    const btn = document.querySelector('#speak')
+    const synth = window.speechSynthesis
+    let utterThis
+    btn.onclick =()=> synth.speak(utterThis)
+    
+    function setQ(){
+      q.querySelector('h2').innerHTML = lines[current] //populate the line
+      gsap.fromTo(q, {opacity:0}, {opacity:1, ease:'power1.inOut'})
+    
+      const w = document.querySelector('b') //the word
+      let str = w.innerHTML
+      let inputStr = ''
+      let arr = str.split('')
+      
+      w.innerHTML = ''
+      arr.forEach((t,i)=>{
+        if (i==0) w.innerHTML+='<span class="blink">_</span>'
+        else w.innerHTML+='_'
+      })
+      const spaceBlink = ()=> gsap.to('.blink', {opacity:0.2, yoyo:true, repeat:15, ease:'sine.inOut'})
+      spaceBlink()
+      
+      utterThis = new SpeechSynthesisUtterance(str) //set the speech button
+      gsap.delayedCall(0.5, ()=>synth.speak(utterThis) )
+      
+      window.onkeyup = (e)=>{ //console.log(e.keyCode)
+        if (e.keyCode==8) { // backspace, remove last character
+          inputStr = inputStr.slice(0,-1)
+          gsap.set(w, {color:'#000'})
+        }
+        else if (e.keyCode >= 65 && e.keyCode <= 90){ // letter keys
+          if (inputStr.length==arr.length) return spellTest()
+          inputStr += e.key
+        }
+        else return; // ignore all other keys
+        let spaces = ''
+        arr.forEach((t,i)=>{
+          if (i>=inputStr.length) {
+            if (i<inputStr.length+1) spaces+='<span class="blink">_</span>'
+            else spaces+='_'
+          }
+        })
+        w.innerHTML = (inputStr+spaces)    
+        if (inputStr.length==arr.length) spellTest()
+        else spaceBlink()
+      }
+      
+      
+      
+      function spellTest(){
+        let wrong = 0
+        arr.forEach((t,i)=>{if (inputStr[i]!=t) wrong++})
+        if (wrong>0) gsap.set(w, {color:'#f00'})
+        else {
+          window.onkeyup = null
+          tl.restart()
+          current++
+          gsap.to(q, {duration:0.8, opacity:0, ease:'power2.inOut', onComplete:()=>{
+            (current<lines.length) ? setQ() : endRound()
+          }})
+        }
+      }
+    }
+    
+    function endRound(){
+      current = 0
+      chimeSnd.play()
+      gsap.timeline()
+        .set('#menu h4', {innerHTML:'Well Done. Play again?'})
+        .to('#main', {autoAlpha:0})
+        .to('#menu', {autoAlpha:1})
+    }
+    
+    
+    // Make confetti
+    const stage = document.querySelector('#confetti')
+    for (var i=0; i<20; i++){
+      const emoji = document.createElement('div')
+      stage.append(emoji)
+      gsap.set(emoji, {
+        attr:{class:'emoji'},
+        position:'absolute',
+        left:'50%',
+        top:'110%',
+        xPercent:'-50',
+        fontSize:'6vw',
+        innerHTML:()=>['🎉','⭐','😄','🥳'][gsap.utils.random(0,3,1)]
+      })
+    }
+    // Timeline for confetti spray
+    const tl = gsap.timeline({paused:true, defaults:{duration:1.3, repeatRefresh:true}})
+      .add(()=>gsap.to('#progress .fg', {attr:{d:'M0,1 l'+(current+1)+',0'}}))
+      .to('.emoji', {duration:0.6, y:()=>'random(-400,-'+(innerHeight*1.2)+')', yoyo:true, repeat:1}, 0)
+      .to('.emoji', {x:()=>'random(-'+(innerWidth*1.2)+','+(innerWidth*1.2)+')', rotate:()=>'random(-20,20)', ease:'none'}, 0)
+      .to('.emoji', {scale:()=>'random(0.8,1.8)', ease:'sine.inOut'}, 0)
+</script>
+</body>
+</html>
